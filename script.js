@@ -8,7 +8,6 @@
 // 3. Display results in the browser.
 // ---------------------------------------------
 
-
 // 🧩 STEP 1: Get Computer Choice
 // Goal: Randomly select "rock", "paper", or "scissors".
 // ---------------------------------------------------
@@ -22,6 +21,9 @@
 // 6️⃣ Return the choice.
 
 function getComputerChoice() {
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * 3);
+    return choices[randomIndex];
     // ✍️ Write your code here following the steps above
 }
 
@@ -40,6 +42,18 @@ function getComputerChoice() {
 // Use if-else ladder
 
 function determineWinner(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+        return ("Its a tie.")
+    }
+
+    if ((userChoice === "rock" && computerChoice === "scissors") ||
+        (userChoice === "paper" && computerChoice === "rock") ||
+        (userChoice === "scissors" && computerChoice === "paper")) {
+        return ("you win!") // chose to do or statement for cleaner code.
+    } else {
+        return ("Computer wins")
+    }
+
     // ✍️ Write your comparison logic here
 }
 
@@ -57,7 +71,15 @@ function determineWinner(userChoice, computerChoice) {
 //     - Final result message
 
 function playGame(userChoice) {
-    // ✍️ Your code here
+    const computerChoice = getComputerChoice();
+    const resultMessage = determineWinner(userChoice, computerChoice);
+
+    const resultChoice = document.getElementById("result");
+    resultChoice.innerHTML = `
+   <p> You Chose: ${getEmoji(userChoice)}</P>
+   <p> Computer Chose ${getEmoji(computerChoice)}</p>
+   <h3>${resultMessage}</h3>
+   `
 }
 
 
@@ -71,5 +93,14 @@ function playGame(userChoice) {
 // using if-else ladder or switch statement(check w3schools for switch)
 
 function getEmoji(choice) {
+    switch (choice) {
+        case "rock":
+            return "🪨";
+
+        case "paper":
+            return "📃";
+        case "scissors":
+            return "✂️";
+    }
     // ✍️ Write your switch() logic here
 }
